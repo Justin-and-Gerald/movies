@@ -83,7 +83,7 @@
         let rating = $('#add-rating').val();
         console.log(title)
         // GET Request from the OMDB API searching by our input title
-        fetch(`http://www.omdbapi.com/?i=${title}&apikey=5d08c893`)
+        fetch(`http://www.omdbapi.com/?i=${title}&apikey=`)
             .then(resp => resp.json())
             .then(data => {
                 // Parsing through the returned attributes to match them to our Movie database attributes
