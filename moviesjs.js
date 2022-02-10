@@ -1,12 +1,10 @@
 {
-    // const $ = require('jquery');
-    const THEMOVIEDB_API_TOKEN = "67b9c6b38ecdf29bee715b3e3eef0d84"
 
-    const harkenDatabase = "https://enshrined-icy-harpymimus.glitch.me/movies"
+    const glitch = "https://wooden-phrygian-comma.glitch.me/movies"
     $(document).ready(() => {
         //--- Content for Main tab
         function getPoster(title) {
-            return fetch(`https://api.themoviedb.org/3/search/movie?api_key=${THEMOVIEDB_API_TOKEN}&query=${title}`)
+            return fetch(`https://api.themoviedb.org/3/search/movie?api_key=${movieKey}&query=${title}`)
                 .then(response => response.json())
                 .then(movie => {
                     console.log(movie)
@@ -16,8 +14,8 @@
                 .catch(error => console.error(error))
         }
 
-        function harkenMovies() {
-            fetch(harkenDatabase)
+        function ourMovies() {
+            fetch(glitch)
                 .then(response => response.json())
                 .then(movies => {
                     let promises = [];
@@ -27,7 +25,7 @@
                             <div id="${title}" class="card my-2" style="width: 18rem;">
                                 <img class="card-img-top" data- src="" alt="movie poster">
                                 <div id="${id}" class="card-body">
-                                    <h3>${title}</h3> 
+                                    <h3>${title}</h3>
                                     <p>  ${rating} <i class="fas fa-star"></i></p>
                                     <div class="d-flex justify-content-around">
                                         <button data-movieid="${id}" data-movietitle="${title}" data-rating="${rating}" class="edit btn btn-dark">Edit</button>
@@ -52,7 +50,7 @@
         }
 
         //Initial call to populate Main tab
-        harkenMovies();
+        ourMovies();
 
         //---- Add a Movie Tab
         let getSearchPoster = function () {
@@ -62,7 +60,7 @@
                 $('#poster').html('<div class="alert"><strong>Oops!</strong> Try adding something into the search field.</div>');
             } else {
                 $('#poster').html('<div class="alert"><strong>Loading...</strong></div>');
-                $.getJSON("https://api.themoviedb.org/3/search/movie?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&query=" + film + "&callback=?",
+                $.getJSON(`https://api.themoviedb.org/3/search/movie?api_key=${movieKey}&query=${film}&callback=?`,
                     function (json) {
                         //Found Title
                         if (json !== "Nothing found.") {
@@ -73,7 +71,7 @@
                                 + json.results[0].poster_path + '\" class=\"img-responsive\" alt="movie poster"></div>');
                             //Show alternate response when title not found
                         } else {
-                            $.getJSON("https://api.themoviedb.org/3/search/movie?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&query=goonies&callback=?",
+                            $.getJSON(`https://api.themoviedb.org/3/search/movie?api_key=${movieKey}&query=goonies&callback=?`,
                                 function (json) {
                                     //console.log(json);
                                     $('#poster').html('<div class="alert"><p>We\'re afraid nothing was found for that search.</p></div>' +
@@ -88,7 +86,7 @@
                         }
 
                         function addMovie(newMovie) {
-                            return fetch(harkenDatabase, {
+                            return fetch(glitch, {
                                 method: "POST",
                                 headers: {"Content-Type": "application/json"},
                                 body: JSON.stringify(newMovie)
@@ -102,11 +100,11 @@
                         }
 
                         addMovie(newMovie).then(() => {
-                            return fetch(harkenDatabase)
+                            return fetch(glitch)
                                 .then(response => response.json())
                                 .then(console.log)
                                 .then ($('#main').empty())
-                                .then (harkenMovies())
+                                .then (ourMovies())
                                 .catch(console.error);
                         })
                     });
@@ -145,7 +143,7 @@
                 body: raw,
                 redirect: 'follow'
             };
-            let targetUrl = harkenDatabase + '/' + movieIdNumber;
+            let targetUrl = glitch + '/' + movieIdNumber;
             return fetch(targetUrl, requestOptions)
         }
 
@@ -155,7 +153,7 @@
                 method: 'DELETE',
                 redirect: 'follow'
             };
-            let targetUrl = harkenDatabase + '/' + movieIdNumber;
+            let targetUrl = glitch + '/' + movieIdNumber;
             console.log(targetUrl)
             return fetch(targetUrl, requestOptions)
         }
@@ -186,8 +184,6 @@
                         return editMovie(selectedMovie, newTitle, newRating)
                             .then(response => response.json())
                             .then(console.log)
-                            //.then ($('#main').empty())
-                            //.then (setTimeout(harkenMovies(),2000))
                             .catch(console.error);
                     })
                 })
@@ -206,7 +202,7 @@
                         .then(response => response.json())
                         .then(console.log)
                         .then ($('#main').empty())
-                        .then (harkenMovies())
+                        .then (glitch())
                         .catch(console.error);
                 })
             });

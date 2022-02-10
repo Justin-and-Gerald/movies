@@ -1,0 +1,12 @@
+https://developers.themoviedb.org/3
+
+Here's an example API request:
+
+https://api.themoviedb.org/3/movie/550?api_key=a79c10e281bddf600e942e8113e61d3a
+
+Useful Links
+
+Documentation: https://developers.themoviedb.org/3/getting-started/introduction
+Support forum: https://www.themoviedb.org/talk/category/5047958519c29526b50017d6
+Wrappers & libraries: https://www.themoviedb.org/documentation/api/wrappers-libraries
+Service status: https://status.themoviedb.org
