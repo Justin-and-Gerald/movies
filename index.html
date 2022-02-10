@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movies!</title>
+    <!-- FontAwesome Link -->
+    <script src="https://kit.fontawesome.com/4d3cbbf2b8.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Custom Stylesheet -->
+
+
+</head>
+<body>
+<!-- Nav Bar-->
+<div class="nav">
+    <ul class="navbar-list">
+        <li><a id="icon-film" href="#"><i class="fas fa-film"></i> movies </a>
+        </li>
+        <li><a href="#">About</a>
+        </li>
+        <li><a href="#">Contact</a>
+        </li>
+        <li><a href="#"><i class="fab fa-twitter"></i> Follow Us</a>
+        </li>
+    </ul>
+</div>
+<!-- Header-Title with BG Style and Sub-Navigation for Forms -->
+<header>
+    <div>
+        <h1>Movie Project</h1>
+    </div>
+    <!--Form Container: All forms are hidden by default, each tab will toggle hidden on its respective form -->
+    <div id="form-container">
+        <div class="form-sub" id="sub-navigation">
+            <!--Search Bar Tab-->
+            <div class="nav-tab" id="search-tab">
+                Search
+                <i class="hide fas fa-arrow-circle-left" id="search-left"></i>
+                <i class="fas fa-arrow-circle-right" id="search-right"></i>
+            </div>
+            <!--Add Tab-->
+            <div class="nav-tab" id="add-tab">
+                Add
+                <i class="hide fas fa-arrow-circle-left" id="add-left"></i>
+                <i class="fas fa-arrow-circle-right" id="add-right"></i>
+            </div>
+            <!--Edit Tab-->
+            <div class="nav-tab" id="edit-tab">
+                Edit
+                <i class="hide fas fa-arrow-circle-left" id="edit-left"></i>
+                <i class="fas fa-arrow-circle-right" id="edit-right"></i>
+            </div>
+        </div>
+        <!-- Form to Search Database, With Sort+Filter Options to be added-->
+        <div class="hide form-sub" id="search-form">
+            <h2>Search our Database:</h2>
+            <label for="search-title">By Title:</label>
+            <input type="text" id="search-title" placeholder="Type Title Here...">
+            <label for="search-title">By Genre:</label>
+            <input type="text" id="search-title" placeholder="Type Genre Here...">
+            <button id="search-movie">Search</button>
+        </div>
+
+        <!-- Form to Add a Movie, With Title and Rating Only-->
+        <div class="hide form-sub" id="add-form">
+            <h2>Add a Movie</h2>
+            <div class="split">
+                <label for="add-title">Title:</label>
+                <input type="text" id="add-title" placeholder="Type Title Here...">
+            </div>
+            <div class="split">
+                <label for="add-rating">Rating:</label>
+                <input type="number" id="add-rating" name="rating" min="1" max="5" value="1">
+            </div>
+            <button id="add-movie">Add Title</button>
+        </div>
+        <!-- Form to Edit a Movie, with inputs for each displayed attribute-->
+        <div class="hide form-sub" id="edit-form">
+            <div class="column">
+                <div>
+                    <label for="edit-title">Title:</label>
+                    <input type="text" id="edit-title" placeholder="">
+                </div>
+                <div>
+                    <label for="edit-release">Released:</label>
+                    <input type="text" id="edit-release" placeholder="">
+                </div>
+                <div>
+                    <label for="edit-director">Director:</label>
+                    <input type="text" id="edit-director" placeholder="">
+                </div>
+                <div>
+                    <label for="edit-rating">Rating:</label>
+                    <input  type="number" id="edit-rating"  min="1" max="5" value="1">
+                </div>
+            </div>
+            <div class="column">
+                <div>
+                    <label for="edit-actors">Actors:</label>
+                    <input type="text" id="edit-actors" placeholder="">
+                </div>
+                <div>
+                    <label for="edit-plot">Summary:</label>
+                    <input type="text" id="edit-plot" placeholder="">
+                </div>
+                <div>
+                    <label for="edit-genre">Genre:</label>
+                    <input type="text" id="edit-genre" placeholder="">
+                </div>
+                <button id="edit-apply">Apply Changes</button>
+            </div>
+            <!-- MOVIE ID VALUE-->
+            <!--Hidden input that allows us to pass the movie ID through the form functions-->
+            <input type="hidden" id="movie-id" value="">
+        </div>
+
+    </div>
+</header>
+
+
+
+<!--Target Container for Displaying movies-->
+<div id="movies">
+    <!--Container for Loading Message-->
+    <!--Currently Displays "Loading-Movies...", needs to remain in "#movies" div to be removed when loading is complete -->
+    <div class="container">
+        <div class="loading">
+            <div>L</div><div>o</div><div>a</div><div>d</div><div>i</div><div>n</div><div>g</div><div>-</div>
+            <div>M</div><div>o</div><div>v</div><div>i</div><div>e</div><div>s</div><div>.</div><div>.</div><div>.</div>
+        </div>
+    </div>
+</div>
+
+<!-- Jquery Source -->
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+        crossorigin="anonymous"></script>
+<!-- API Key Source -->
+<!--<script src="hidden/keys.js"></script>-->
+<!--Our Movie Project Script-->
+
+<script src="moviesjs.js"></script>
+</body>
+</html>
