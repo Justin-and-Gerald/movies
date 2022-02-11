@@ -11,9 +11,13 @@
 </head>
 
 <body>
-<header class="jumbotron"></header>
+
+<div id="movies" class="d-flex flex-wrap justify-content-around"></div>
+<!--<header class="jumbotron">Sirius Movie Database</header>-->
 <main id="main" class="container">
+
     <nav>
+        <header class="jumbotron col-lg-auto bg-transparent text-white">Sirius Movie Database</header>
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
             <a class="nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Movies</a>
             <a class="nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Search Movies</a>
@@ -22,8 +26,7 @@
     </nav>
     <div class="tab-content" id="nav-tabContent">
         <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-            <div class="se-pre-con"></div>
-            <div id="movies" class="d-flex flex-wrap justify-content-around"></div>
+
         </div>
         <div class="tab-pane fade show" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
             <div class="search">
@@ -37,7 +40,13 @@
             </div>
         </div>
     </div>
-    <div class="modal"></div>
+        <div class="preloader">
+            <div class="loading">
+            <div>L</div><div>o</div><div>a</div><div>d</div><div>i</div><div>n</div><div>g</div><div>-</div>
+            <div>M</div><div>o</div><div>v</div><div>i</div><div>e</div><div>s</div><div>.</div><div>.</div><div>.</div>
+            </div>
+        </div>
+    </div>
 </main>
 
 <footer>

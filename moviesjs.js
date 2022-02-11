@@ -20,13 +20,18 @@
                 .then(movies => {
                     let promises = [];
                     for (let movie of movies) {
-                        let {title, rating, id} = movie;
+                        let {title, rating, id, year, director, genre, actors, plot} = movie;
                         $('#main').append(`
                             <div id="${title}" class="card my-2" style="width: 18rem;">
                                 <img class="card-img-top" data- src="" alt="movie poster">
                                 <div id="${id}" class="card-body">
                                     <h3>${title}</h3>
-                                    <p>  ${rating} <i class="fas fa-star"></i></p>
+                                    <p class="rating fas fa-star">  Rating: ${rating}</p>
+                                    <p class="released fas fa-star">   Released: ${year}</i></p>
+                                    <p class="director fas fa-star">   Directed by: ${director}</p>
+                                    <p class="genre fas fa-star">  Genre: ${genre}</p>
+                                    <p class="starring fas fa-star">  Starring: ${actors}</p>
+                                    <p class="plot fas fa-star">  Plot: ${plot}</p>
                                     <div class="d-flex justify-content-around">
                                         <button data-movieid="${id}" data-movietitle="${title}" data-rating="${rating}" class="edit btn btn-dark">Edit</button>
                                         <button data-movieid="${id}" class="deletion btn btn-dark">Delete</button>
@@ -208,11 +213,84 @@
             });
 
         }
+//         // RENDER FUNCTION
+// // Take each movie (object) and turn each attribute into HTML Elements for display
+//         const rendermovies = (movies) => {
+//             // Empty the HTML String on each call
+//             let moviesHTML = "";
+//             // Iterate through each movie
+//             for (let movie of movies) {
+//                 // Create a new "Movie" Div, with nested divs for each listed attribute
+//                 moviesHTML += '<div class="movie">' +
+//          +
+//                     // EDIT & DELETE BUTTONS
+//                     // Rendered with the particular movie ID, this allows targeting of the class "edit-btn" or "delete-btn"
+//                     // for simplified event function, while still allowing *this* particular movie to be targeted to PATCH or DELETE
+//                     '<button class="edit-btn"  data-id="' + movie.id + '">Edit</button>' +
+//                     '<button class="delete-btn" data-id="' + movie.id + '">Delete</button>' +
+//                     // Closing individual "movie" div
+//                     '</div>'
+//             }
+//             // Set the HTML of the target to the given string of elements & data.
+//             $('#movies').html(moviesHTML);
+//             // EDIT CLICK FUNCTION
+//             $('.edit-btn').click(function () {
+//                 populateEdit($(this).data("id"));
+//             });
+//             // DELETE CLICK FUNCTION
+//             $('.delete-btn').click(function () {
+//                 deleteMovie($(this).data("id"));
+//             });
+//         }
+// // SUB-NAVIGATION: FORM CONTROL
+// // Each Tab toggles its given form, as well as the tab's icon for a left or right arrow.
+//         $('#search-tab').click(() => {
+//             $('#search-form').toggleClass('hide');
+//             $('#search-right').toggleClass('hide');
+//             $('#search-left').toggleClass('hide');
+//         });
+//         $('#add-tab').click(() => {
+//             $('#add-form').toggleClass('hide');
+//             $('#add-right').toggleClass('hide');
+//             $('#add-left').toggleClass('hide');
+//         });
+//         $('#edit-tab').click(() => {
+//             $('#edit-form').toggleClass('hide');
+//             $('#edit-right').toggleClass('hide');
+//             $('#edit-left').toggleClass('hide');
+//         });
+// // FORM SUBMISSION: ADD FUNCTION
+// // On click of "Add" Button, will create a new movie object from the return of the OMDB API
+// // and send the new object to the createMovie() function, which posts it to our db
+//         $('#add-movie').click(function (e) {
+//             e.preventDefault();
+//             // Takes the form values of the title and rating
+//             let title = $('#add-title').val();
+//             let rating = $('#add-rating').val();
+//             // GET Request from the OMDB API searching by our input title
+//             fetch(`${OMDB_URL}?t=${(title).toLowerCase()}&apikey=${OMDB_API}`)
+//                 .then(resp => resp.json())
+//                 .then(data => {
+//                     // Parsing through the returned attributes to match them to our Movie database attributes
+//                     let title = data.Title;
+//                     let year = data.Year;
+//                     let director = data.Director;
+//                     let poster = data.Poster;
+//                     let plot = data.Plot;
+//                     let genre = data.Genre;
+//                     let actors = data.Actors;
+//                     // Creating a new movie object with the desired attributes
+//                     let newMovie = {title, poster, rating, year, director, genre, actors, plot};
+//                     // calling the POST function with the new movie
+//                     createMovie(newMovie);
+//                 })
+//                 .catch(err => console.error(err));
+//         });
 
         //---- Loading Animation
-        $(window).on('load', function () {
-            //Animate loader off screen
-            $(".se-pre-con").fadeOut("slow");
+
+        $(window).load(function() {
+            $('.preloader').fadeOut('slow');
         });
 
     });
