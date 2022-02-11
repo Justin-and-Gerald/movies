@@ -125,3 +125,12 @@ body {
         transform: translateY(0px);
     }
 }
+.card{
+    width: 100%;
+    height: 950px;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 15px;
+    letter-spacing: 2px;
+}
+
