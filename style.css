@@ -28,7 +28,7 @@ body {
 
 /* The Close Button */
 .close {
-    color: #aaa;
+    /*color: #aaa;*/
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -59,7 +59,7 @@ body {
     font-weight: normal;
     letter-spacing: 4px;
     text-transform: uppercase;
-    color: #FEC468;
+    color: #22ad7c;
     animation-name: bounce;
     animation-duration: 3.5s;
     animation-iteration-count: infinite;
