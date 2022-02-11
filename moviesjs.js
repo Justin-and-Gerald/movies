@@ -309,12 +309,12 @@
 
         //---- Loading Animation
 
-        $(window).load(function() {
-            $('.preloader').fadeOut('slow');
+        $(window).load(function () {
+            setTimeout(function () {
+                $('.preloader').fadeOut('slow');
+            }, 2000);
         });
-
-    });
-// }
+});
 
 
 
