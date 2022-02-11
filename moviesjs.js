@@ -1,4 +1,4 @@
-{
+// {
 
     const glitch = "https://wooden-phrygian-comma.glitch.me/movies"
     $(document).ready(() => {
@@ -7,7 +7,7 @@
             return fetch(`https://api.themoviedb.org/3/search/movie?api_key=${movieKey}&query=${title}`)
                 .then(response => response.json())
                 .then(movie => {
-                    console.log(movie)
+                    // console.log(movie)
                     let posterPath = movie.results[0].poster_path
                     return "http://image.tmdb.org/t/p/w500" + posterPath
                 })
@@ -67,18 +67,38 @@
                 $('#poster').html('<div class="alert"><strong>Loading...</strong></div>');
                 $.getJSON(`https://api.themoviedb.org/3/search/movie?api_key=${movieKey}&query=${film}&callback=?`,
                     function (json) {
+                        console.log(json.results);
                         //Found Title
                         if (json !== "Nothing found.") {
-                            //console.log(json);
+
                             //Show user result
-                            $('#poster').html('<div class="card-body"><p class="text-white">You have added: <strong>' + json.results[0].title +
-                                '</strong></p></div><div class="card" style="width: 18rem;"><img class="card-img-top" src=\"http://image.tmdb.org/t/p/w500/'
-                                + json.results[0].poster_path + '\" class=\"img-responsive\" alt="movie poster"></div>');
+                            $('#poster').html('<div class="card-body">' +
+                                '<p class="text-white">You have added: ' +
+                                '<strong>' + json.results[0].title + '</strong>' +
+                                '</p>' +
+                                '</div>' +
+                                '<div class="card" style="width: 18rem;">' +
+                                '<img class="card-img-top" src=\"http://image.tmdb.org/t/p/w500/' + json.results[0].poster_path + '\" class=\"img-responsive\" alt="movie poster">' +
+                                '<div id="${id}" class="card-body">' +
+                                    '<h3>' + json.results[0].title + '</h3>' +
+                                    '<p class="rating fas fa-star">  Rating: ${rating}</p>' +
+                                    '<p class="released fas fa-star">' + 'Released:' + json.results[0].release_date + '</i></p>' +
+                            '<p class="director fas fa-star">' + 'Directed by:' + 'director' + '</p>' +
+                            '<p class="genre fas fa-star">' +  'Genre:' + 'genre' + '</p>' +
+                            '<p class="starring fas fa-star">' +  "Starring:" + 'actors' + '</p>' +
+                            '<p class="plot fas fa-star">' +  "Plot:" + json.results[0].overview + '</p>' +
+                            '<div class="d-flex justify-content-around">' +
+                                '<button data-movieid="${id}" data-movietitle="${title}" data-rating="${rating}" class="edit btn btn-dark">Edit</button>' +
+                               ' <button data-movieid="${id}" class="deletion btn btn-dark">Delete</button>' +
+                            '</div>' +
+                        '</div>' +
+                                '</div>');
+                            console.log(json.results[0].title);
                             //Show alternate response when title not found
                         } else {
                             $.getJSON(`https://api.themoviedb.org/3/search/movie?api_key=${movieKey}&query=goonies&callback=?`,
                                 function (json) {
-                                    //console.log(json);
+
                                     $('#poster').html('<div class="alert"><p>We\'re afraid nothing was found for that search.</p></div>' +
                                         '<p>Perhaps you were looking for The Goonies?</p><img alt="movie poster" id="thePoster" src=\"http://image.tmdb.org/t/p/'
                                         + json.results[0].poster_path + '\" class="img-responsive">');
@@ -86,7 +106,7 @@
                         }
 
                         let newMovie = {
-                            title: json.results[0].title,
+                            title: json.results.title,
                             rating: document.getElementById('rate').value
                         }
 
@@ -159,7 +179,7 @@
                 redirect: 'follow'
             };
             let targetUrl = glitch + '/' + movieIdNumber;
-            console.log(targetUrl)
+            // console.log(targetUrl)
             return fetch(targetUrl, requestOptions)
         }
 
@@ -184,7 +204,7 @@
                     $('#submit').click(function (){
                         newTitle = $('#new-movie-title').val()
                         newRating = $('#new-rating').val()
-                        console.log(newTitle, newRating, selectedMovie)
+                        // console.log(newTitle, newRating, selectedMovie)
                         modal.style.display = "none"
                         return editMovie(selectedMovie, newTitle, newRating)
                             .then(response => response.json())
@@ -294,7 +314,7 @@
         });
 
     });
-}
+// }
 
 
 
