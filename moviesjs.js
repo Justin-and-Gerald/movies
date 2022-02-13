@@ -67,33 +67,34 @@
                 $('#poster').html('<div class="alert"><strong>Loading...</strong></div>');
                 $.getJSON(`https://api.themoviedb.org/3/search/movie?api_key=${movieKey}&query=${film}&callback=?`,
                     function (json) {
-                        console.log(json.results);
+                        // console.log(json.results);
                         //Found Title
                         if (json !== "Nothing found.") {
 
                             //Show user result
-                            $('#poster').html('<div class="card-body">' +
-                                '<p class="text-white">You have added: ' +
-                                '<strong>' + json.results[0].title + '</strong>' +
-                                '</p>' +
+                            $('#poster').html(
+                                '<div class="card-body">' +
+                                    '<p class="text-white">You have added: ' +
+                                    '<strong>' + json.results[0].title + '</strong>' +
+                                    '</p>' +
                                 '</div>' +
                                 '<div class="card" style="width: 18rem;">' +
-                                '<img class="card-img-top" src=\"http://image.tmdb.org/t/p/w500/' + json.results[0].poster_path + '\" class=\"img-responsive\" alt="movie poster">' +
-                                '<div id="${id}" class="card-body">' +
-                                    '<h3>' + json.results[0].title + '</h3>' +
-                                    '<p class="rating fas fa-star">  Rating: ${rating}</p>' +
-                                    '<p class="released fas fa-star">' + 'Released:' + json.results[0].release_date + '</i></p>' +
-                            '<p class="director fas fa-star">' + 'Directed by:' + 'director' + '</p>' +
-                            '<p class="genre fas fa-star">' +  'Genre:' + 'genre' + '</p>' +
-                            '<p class="starring fas fa-star">' +  "Starring:" + 'actors' + '</p>' +
-                            '<p class="plot fas fa-star">' +  "Plot:" + json.results[0].overview + '</p>' +
-                            '<div class="d-flex justify-content-around">' +
-                                '<button data-movieid="${id}" data-movietitle="${title}" data-rating="${rating}" class="edit btn btn-dark">Edit</button>' +
-                               ' <button data-movieid="${id}" class="deletion btn btn-dark">Delete</button>' +
-                            '</div>' +
-                        '</div>' +
+                                    '<img class="card-img-top" src=\"http://image.tmdb.org/t/p/w500/' + json.results[0].poster_path + '\" class=\"img-responsive\" alt="movie poster">' +
+                                    '<div id="${id}" class="card-body">' +
+                                        '<h3>' + json.results[0].title + '</h3>' +
+                                        '<p class="rating fas fa-star">  Rating: ${rating}</p>' +
+                                        '<p class="released fas fa-star">' + 'Released:' + json.results[0].release_date + '</i></p>' +
+                                        '<p class="director fas fa-star">' + 'Directed by:' + 'director' + '</p>' +
+                                        '<p class="genre fas fa-star">' +  'Genre:' + 'genre' + '</p>' +
+                                        '<p class="starring fas fa-star">' +  "Starring:" + 'actors' + '</p>' +
+                                        '<p class="plot fas fa-star">' +  "Plot:" + json.results[0].overview + '</p>' +
+                                        '<div class="d-flex justify-content-around">' +
+                                            '<button data-movieid="${id}" data-movietitle="${title}" data-rating="${rating}" class="edit btn btn-dark">Edit</button>' +
+                                            ' <button data-movieid="${id}" class="deletion btn btn-dark">Delete</button>' +
+                                        '</div>' +
+                                    '</div>' +
                                 '</div>');
-                            console.log(json.results[0].title);
+                            // console.log(json.results[0].title);
                             //Show alternate response when title not found
                         } else {
                             $.getJSON(`https://api.themoviedb.org/3/search/movie?api_key=${movieKey}&query=goonies&callback=?`,
@@ -104,10 +105,10 @@
                                         + json.results[0].poster_path + '\" class="img-responsive">');
                                 });
                         }
-
+                        console.log(json.results[0]);
                         let newMovie = {
                             title: json.results.title,
-                            rating: document.getElementById('rate').value
+                            // rating: document.getElementById('rate').value
                         }
 
                         function addMovie(newMovie) {
@@ -118,7 +119,7 @@
                             })
                                 .then(response => response.json())
                                 .then(data => {
-                                    console.log("Success!")
+                                    // console.log(newMovie)
                                     return data;
                                 })
                                 .catch(console.error);
@@ -223,11 +224,12 @@
             deleteButtons.forEach((deleteButton, key) =>{
                 deleteButton.addEventListener("click", (e)=>{
                     let selectedMovie = e.target.dataset['movieid'];
+                    // console.log(selectedMovie);
                     deleteMovie(selectedMovie)
                         .then(response => response.json())
                         .then(console.log)
                         .then ($('#main').empty())
-                        .then (glitch())
+                        // .then (glitch())
                         .catch(console.error);
                 })
             });
