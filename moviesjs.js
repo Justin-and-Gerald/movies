@@ -105,7 +105,7 @@
                                         + json.results[0].poster_path + '\" class="img-responsive">');
                                 });
                         }
-                        console.log(json.results[0]);
+                        // console.log(json.results[0]);
                         let newMovie = {
                             title: json.results.title,
                             // rating: document.getElementById('rate').value
@@ -128,9 +128,9 @@
                         addMovie(newMovie).then(() => {
                             return fetch(glitch)
                                 .then(response => response.json())
-                                .then(console.log)
+                                // .then(console.log)
                                 .then ($('#main').empty())
-                                .then (ourMovies())
+                                // .then (ourMovies())
                                 .catch(console.error);
                         })
                     });
@@ -209,7 +209,7 @@
                         modal.style.display = "none"
                         return editMovie(selectedMovie, newTitle, newRating)
                             .then(response => response.json())
-                            .then(console.log)
+                            // .then(console.log)
                             .catch(console.error);
                     })
                 })
@@ -224,14 +224,17 @@
             deleteButtons.forEach((deleteButton, key) =>{
                 deleteButton.addEventListener("click", (e)=>{
                     let selectedMovie = e.target.dataset['movieid'];
-                    // console.log(selectedMovie);
+                    console.log(e.target.dataset);
+                    console.log(selectedMovie);
                     deleteMovie(selectedMovie)
                         .then(response => response.json())
-                        .then(console.log)
+
                         .then ($('#main').empty())
-                        // .then (glitch())
+                        .then (ourMovies())
                         .catch(console.error);
+
                 })
+
             });
 
         }
