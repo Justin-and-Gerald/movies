@@ -367,7 +367,7 @@ const OMDB_URL = `http://www.omdbapi.com/`;
             $(window).load(function () {
                 setTimeout(function () {
                     $('.preloader').fadeOut('slow');
-                }, 2000);
+                }, 9000);
             });
         });
 
@@ -375,7 +375,7 @@ const OMDB_URL = `http://www.omdbapi.com/`;
 
 
 
-
+// research patch vs put
 
 
 
