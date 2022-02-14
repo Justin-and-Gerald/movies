@@ -1,6 +1,6 @@
 // {
 const OMDB_URL = `http://www.omdbapi.com/`;
-    // const glitch = "https://buttercup-candle-walnut.glitch.me/movies";
+    const glitch = "https://buttercup-candle-walnut.glitch.me/movies";
     $(document).ready(() => {
         //--- Content for Main tab
         function getPoster(title) {
@@ -38,9 +38,11 @@ const OMDB_URL = `http://www.omdbapi.com/`;
                                     </div>
                                 </div>
                             </div>
+                            
                         `);
                         promises.push(getPoster(title))
                     }
+
                     Promise.all(promises)
                         .then(function (movieUrls) {
                             let images = $('img');
@@ -56,6 +58,9 @@ const OMDB_URL = `http://www.omdbapi.com/`;
 
         //Initial call to populate Main tab
         ourMovies();
+        fetch(glitch)
+            .then(response => response.json())
+            .then(json => console.log(json))
 
         //---- Add a Movie Tab
         let getSearchPoster = function () {
@@ -67,10 +72,10 @@ const OMDB_URL = `http://www.omdbapi.com/`;
                 $('#poster').html('<div class="alert"><strong>Loading...</strong></div>');
                 $.getJSON(`https://api.themoviedb.org/3/search/movie?api_key=${movieKey}&query=${film}&callback=?`,
                     function (json) {
-                        // console.log(json.results);
+                        console.log(json.results);
                         //Found Title
                         if (json !== "Nothing found.") {
-
+                            console.log(json.results);
                             //Show user result
                             $('#poster').html(
                                 '<div class="card-body">' +
@@ -84,9 +89,9 @@ const OMDB_URL = `http://www.omdbapi.com/`;
                                         '<h3>' + json.results[0].title + '</h3>' +
                                         '<p class="rating fas fa-star">  Rating: ${rating}</p>' +
                                         '<p class="released fas fa-star">' + 'Released:' + json.results[0].release_date + '</i></p>' +
-                                        '<p class="director fas fa-star">' + 'Directed by:' + 'director' + '</p>' +
+                                        // '<p class="director fas fa-star">' + 'Directed by:' + 'director' + '</p>' +
                                         '<p class="genre fas fa-star">' +  'Genre:' + 'genre' + '</p>' +
-                                        '<p class="starring fas fa-star">' +  "Starring:" + 'actors' + '</p>' +
+                                        '<p class="starring fas fa-star">' +  "Starring:" + json.results[0] + '</p>' +
                                         '<p class="plot fas fa-star">' +  "Plot:" + json.results[0].overview + '</p>' +
                                         '<div class="d-flex justify-content-around">' +
                                             '<button data-movieid="${id}" data-movietitle="${title}" data-rating="${rating}" class="edit btn btn-dark">Edit</button>' +
@@ -94,10 +99,10 @@ const OMDB_URL = `http://www.omdbapi.com/`;
                                         '</div>' +
                                     '</div>' +
                                 '</div>');
-                            // console.log(json.results[0].title);
+                            console.log(json.results);
                             //Show alternate response when title not found
                         } else {
-                            $.getJSON(`https://api.themoviedb.org/3/search/movie?api_key=${movieKey}&query=goonies&callback=?`,
+                            $.getJSON(`https://api.themoviedb.org/3/search/movie?api_key=${movieKey}&query=${title}`,
                                 function (json) {
 
                                     $('#poster').html('<div class="alert"><p>We\'re afraid nothing was found for that search.</p></div>' +
@@ -105,7 +110,7 @@ const OMDB_URL = `http://www.omdbapi.com/`;
                                         + json.results[0].poster_path + '\" class="img-responsive">');
                                 });
                         }
-                        // console.log(json.results[0]);
+                        console.log(json.results[0]);
                         let newMovie = {
                             title: json.results.title,
                             // rating: document.getElementById('rate').value
@@ -119,14 +124,14 @@ const OMDB_URL = `http://www.omdbapi.com/`;
                             })
                                 .then(response => response.json())
                                 .then(data => {
-                                    // console.log(newMovie)
+                                    console.log(newMovie)
                                     return data;
                                 })
                                 .catch(console.error);
                         }
 
                         addMovie(newMovie).then(() => {
-                            return fetch(glitch)
+                            return fetch(`https://api.themoviedb.org/3/search/movie?api_key=${movieKey}&query=goonies&callback=?`)
                                 .then(response => response.json())
                                 // .then(console.log)
                                 .then ($('#main').empty())
