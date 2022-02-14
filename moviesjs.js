@@ -1,6 +1,6 @@
 // {
 
-    const glitch = "https://wooden-phrygian-comma.glitch.me/movies"
+    const glitch = "https://buttercup-candle-walnut.glitch.me/movies"
     $(document).ready(() => {
         //--- Content for Main tab
         function getPoster(title) {
