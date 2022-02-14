@@ -7,7 +7,7 @@ const OMDB_URL = `http://www.omdbapi.com/`;
             return fetch(`https://api.themoviedb.org/3/search/movie?api_key=${movieKey}&query=${title}`)
                 .then(response => response.json())
                 .then(movie => {
-                    console.log(movie)
+
                     let posterPath = movie.results[0].poster_path
                     return "http://image.tmdb.org/t/p/w500" + posterPath
                 })
@@ -60,7 +60,7 @@ const OMDB_URL = `http://www.omdbapi.com/`;
         ourMovies();
         fetch(glitch)
             .then(response => response.json())
-            .then(json => console.log(json))
+            // .then(json => console.log(json))
 
         //---- Add a Movie Tab
         let getSearchPoster = function () {
@@ -70,12 +70,13 @@ const OMDB_URL = `http://www.omdbapi.com/`;
                 $('#poster').html('<div class="alert"><strong>Oops!</strong> Try adding something into the search field.</div>');
             } else {
                 $('#poster').html('<div class="alert"><strong>Loading...</strong></div>');
+                // https://imdb-api.com/en/API/SearchMovie/k_lutmd2x6/inception 2010
                 $.getJSON(`https://api.themoviedb.org/3/search/movie?api_key=${movieKey}&query=${film}&callback=?`,
                     function (json) {
                         console.log(json.results);
                         //Found Title
                         if (json !== "Nothing found.") {
-                            console.log(json.results);
+                            // console.log(json.results);
                             //Show user result
                             $('#poster').html(
                                 '<div class="card-body">' +
@@ -99,7 +100,7 @@ const OMDB_URL = `http://www.omdbapi.com/`;
                                         '</div>' +
                                     '</div>' +
                                 '</div>');
-                            console.log(json.results);
+                            // console.log(json.results);
                             //Show alternate response when title not found
                         } else {
                             $.getJSON(`https://api.themoviedb.org/3/search/movie?api_key=${movieKey}&query=${title}`,
@@ -112,7 +113,7 @@ const OMDB_URL = `http://www.omdbapi.com/`;
                         }
                         console.log(json.results[0]);
                         let newMovie = {
-                            title: json.results.title,
+                            title: json.results.title
                             // rating: document.getElementById('rate').value
                         }
 
@@ -124,14 +125,14 @@ const OMDB_URL = `http://www.omdbapi.com/`;
                             })
                                 .then(response => response.json())
                                 .then(data => {
-                                    console.log(newMovie)
+                                    // console.log(newMovie)
                                     return data;
                                 })
                                 .catch(console.error);
                         }
 
                         addMovie(newMovie).then(() => {
-                            return fetch(`https://api.themoviedb.org/3/search/movie?api_key=${movieKey}&query=goonies&callback=?`)
+                            return fetch(OMDB_URL)
                                 .then(response => response.json())
                                 // .then(console.log)
                                 .then ($('#main').empty())
@@ -229,8 +230,8 @@ const OMDB_URL = `http://www.omdbapi.com/`;
             deleteButtons.forEach((deleteButton, key) =>{
                 deleteButton.addEventListener("click", (e)=>{
                     let selectedMovie = e.target.dataset['movieid'];
-                    console.log(e.target.dataset);
-                    console.log(selectedMovie);
+                    // console.log(e.target.dataset);
+                    // console.log(selectedMovie);
                     deleteMovie(selectedMovie)
                         .then(response => response.json())
 
