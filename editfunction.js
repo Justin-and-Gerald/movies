@@ -1,13 +1,13 @@
 "use strict";
-(() => {
+// (() => {
 // Target URL for Glitch
-//     const URL = "https://buttercup-candle-walnut.glitch.me/movies";
+//     const glitch = "https://buttercup-candle-walnut.glitch.me/movies";
 // OMDB URL
-    const OMDB_URL = `http://www.omdbapi.com/`;
+//     const OMDB_URL = `http://www.omdbapi.com/`;
 // FETCH REQUEST
 // Get the array of movie objects and send to the render function
     const getmovies = () => {
-        return fetch(URL)
+        return fetch(glitch)
             .then(resp => resp.json())
             .then(data => {
                 // rendermovies(data);
@@ -163,4 +163,4 @@
         }
         return fetch(`${URL}/${movieID}`, options).then(getmovies).catch(err => console.error(err));
     }
-})();
+// })();

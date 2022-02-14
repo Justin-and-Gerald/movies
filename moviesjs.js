@@ -1,13 +1,13 @@
 // {
-
-    const glitch = "https://buttercup-candle-walnut.glitch.me/movies"
+const OMDB_URL = `http://www.omdbapi.com/`;
+    // const glitch = "https://buttercup-candle-walnut.glitch.me/movies";
     $(document).ready(() => {
         //--- Content for Main tab
         function getPoster(title) {
             return fetch(`https://api.themoviedb.org/3/search/movie?api_key=${movieKey}&query=${title}`)
                 .then(response => response.json())
                 .then(movie => {
-                    // console.log(movie)
+                    console.log(movie)
                     let posterPath = movie.results[0].poster_path
                     return "http://image.tmdb.org/t/p/w500" + posterPath
                 })
