@@ -124,10 +124,10 @@
                             title: json.results[0].title,
                             // rating: json.results[0].rating,
                             // director: json.results[0].director,
-                            released: json.results[0].release_date,
+                            released: json.results[0].released,
                             // genre: json.results[0].genre,
                             // starring: json.results[0].actors,
-                            plot: json.results[0].overview,
+                            plot: json.results[0].plot
 
                         }
 
@@ -139,7 +139,7 @@
                             })
                                 .then(response => response.json())
                                 .then(data => {
-                                    // console.log(newMovie)
+                                    console.log(newMovie)
                                     return data;
                                 })
                                 .catch(console.error);
