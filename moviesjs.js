@@ -1,44 +1,51 @@
-// {
-const OMDB_URL = `http://www.omdbapi.com/`;
-    const glitch = "https://buttercup-candle-walnut.glitch.me/movies";
+{
+    const OMDB_URL = `https://www.omdbapi.com/`;
+    const glitch = "https://lightning-swift-girl.glitch.me/movies";
     $(document).ready(() => {
         //--- Content for Main tab
         function getPoster(title) {
             return fetch(`https://api.themoviedb.org/3/search/movie?api_key=${movieKey}&query=${title}`)
                 .then(response => response.json())
                 .then(movie => {
-
                     let posterPath = movie.results[0].poster_path
                     return "http://image.tmdb.org/t/p/w500" + posterPath
                 })
                 .catch(error => console.error(error))
         }
 
+//
         function ourMovies() {
             fetch(glitch)
                 .then(response => response.json())
                 .then(movies => {
                     let promises = [];
                     for (let movie of movies) {
-                        let {title, rating, id, year, director, genre, actors, plot} = movie;
+                        let {title,
+                            rating,
+                            id,
+                            release_date,
+                            director,
+                            genre,
+                            actors,
+                            overview} = movie;
                         $('#main').append(`
                             <div id="${title}" class="card my-2" style="width: 18rem;">
                                 <img class="card-img-top" data- src="" alt="movie poster">
                                 <div id="${id}" class="card-body">
                                     <h3>${title}</h3>
-                                    <p class="rating fas fa-star">  Rating: ${rating}</p>
-                                    <p class="released fas fa-star">   Released: ${year}</i></p>
-                                    <p class="director fas fa-star">   Directed by: ${director}</p>
-                                    <p class="genre fas fa-star">  Genre: ${genre}</p>
-                                    <p class="starring fas fa-star">  Starring: ${actors}</p>
-                                    <p class="plot fas fa-star">  Plot: ${plot}</p>
+<!--                                    <p class="rating fas fa-star">  Rating: ${rating}</p>-->
+                                    <p class="released fas fa-star">   Released: ${release_date}</i></p>
+<!--                                    <p class="director fas fa-star">   Directed by: ${director}</p>-->
+<!--                                    <p class="genre fas fa-star">  Genre: ${genre}</p>-->
+<!--                                    <p class="starring fas fa-star">  Starring: ${actors}</p>-->
+                                    <p class="plot fas fa-star">  Plot: ${overview}</p>
                                     <div class="d-flex justify-content-around">
                                         <button data-movieid="${id}" data-movietitle="${title}" data-rating="${rating}" class="edit btn btn-dark">Edit</button>
                                         <button data-movieid="${id}" class="deletion btn btn-dark">Delete</button>
                                     </div>
                                 </div>
                             </div>
-                            
+
                         `);
                         promises.push(getPoster(title))
                     }
@@ -60,7 +67,7 @@ const OMDB_URL = `http://www.omdbapi.com/`;
         ourMovies();
         fetch(glitch)
             .then(response => response.json())
-            // .then(json => console.log(json))
+        .then(json => console.log(json))
 
         //---- Add a Movie Tab
         let getSearchPoster = function () {
@@ -76,7 +83,7 @@ const OMDB_URL = `http://www.omdbapi.com/`;
                         console.log(json.results);
                         //Found Title
                         if (json !== "Nothing found.") {
-                            // console.log(json.results);
+                            console.log(json.results);
                             //Show user result
                             $('#poster').html(
                                 '<div class="card-body">' +
@@ -88,11 +95,11 @@ const OMDB_URL = `http://www.omdbapi.com/`;
                                 '<img class="card-img-top" src=\"http://image.tmdb.org/t/p/w500/' + json.results[0].poster_path + '\" class=\"img-responsive\" alt="movie poster">' +
                                 '<div id="${id}" class="card-body">' +
                                 '<h3>' + json.results[0].title + '</h3>' +
-                                '<p class="rating fas fa-star">' + 'Rating:' + json.results[0].rating + '</p>' +
-                                '<p class="released fas fa-star">' + 'Released:' + json.results[0].year + '</i></p>' +
-                                '<p class="director fas fa-star">' + 'Directed by:' + json.results[0].director + '</p>' +
-                                '<p class="genre fas fa-star">' + 'Genre:' + json.results[0].genre + '</p>' +
-                                '<p class="starring fas fa-star">' + "Starring:" + json.results[0] + '</p>' +
+                                // '<p class="rating fas fa-star">' + 'Rating:' + json.results[0].rating + '</p>' +
+                                '<p class="released fas fa-star">' + 'Released:' + json.results[0].release_date + '</i></p>' +
+                                // '<p class="director fas fa-star">' + 'Directed by:' + json.results[0].director + '</p>' +
+                                // '<p class="genre fas fa-star">' + 'Genre:' + json.results[0].genre + '</p>' +
+                                // '<p class="starring fas fa-star">' + "Starring:" + json.results[0] + '</p>' +
                                 '<p class="plot fas fa-star">' + "Plot:" + json.results[0].overview + '</p>' +
                                 '<div class="d-flex justify-content-around">' +
                                 '<button data-movieid="${id}" data-movietitle="${title}" data-rating="${rating}" class="edit btn btn-dark">Edit</button>' +
@@ -100,7 +107,7 @@ const OMDB_URL = `http://www.omdbapi.com/`;
                                 '</div>' +
                                 '</div>' +
                                 '</div>');
-                            // console.log(json.results);
+                            console.log(json.results);
                             //Show alternate response when title not found
                         } else {
                             $.getJSON(`https://api.themoviedb.org/3/search/movie?api_key=${movieKey}&query=${film}`,
@@ -115,12 +122,12 @@ const OMDB_URL = `http://www.omdbapi.com/`;
                         let newMovie = {
 
                             title: json.results[0].title,
-                            rating: json.results[0].rating,
-                            director: json.results[0].director,
-                            released: json.results[0].year,
-                            genre: json.results[0].genre,
-                            starring: json.results[0].actors,
-                            plot: json.results[0].plot,
+                            // rating: json.results[0].rating,
+                            // director: json.results[0].director,
+                            released: json.results[0].release_date,
+                            // genre: json.results[0].genre,
+                            // starring: json.results[0].actors,
+                            plot: json.results[0].overview,
 
                         }
 
@@ -261,7 +268,7 @@ const OMDB_URL = `http://www.omdbapi.com/`;
                     })
                 })
             });
-
+//
             //---- Close modal window if user clicks "cancel"
             $('#cancel').on("click", (e) => {
                 let modal = document.getElementById("myModal");
@@ -286,52 +293,53 @@ const OMDB_URL = `http://www.omdbapi.com/`;
 
         }
 
+//
         // RENDER FUNCTION
 // Take each movie (object) and turn each attribute into HTML Elements for display
-//         const rendermovies = (movies) => {
-//             // Empty the HTML String on each call
-//             let moviesHTML = "";
-//             // Iterate through each movie
-//             for (let movie of movies) {
-//                 // Create a new "Movie" Div, with nested divs for each listed attribute
-//                 moviesHTML += '<div class="movie">' +
-//                     +
-//                         // EDIT & DELETE BUTTONS
-//                         // Rendered with the particular movie ID, this allows targeting of the class "edit-btn" or "delete-btn"
-//                         // for simplified event function, while still allowing *this* particular movie to be targeted to PATCH or DELETE
-//                         '<button class="edit-btn"  data-id="' + movie.id + '">Edit</button>' +
-//                     '<button class="delete-btn" data-id="' + movie.id + '">Delete</button>' +
-//                     // Closing individual "movie" div
-//                     '</div>'
-//             }
-//             // Set the HTML of the target to the given string of elements & data.
-//             $('#movies').html(moviesHTML);
-//             // EDIT CLICK FUNCTION
-//             $('.edit-btn').click(function () {
-//                 populateEdit($(this).data("id"));
-//             });
-//             // DELETE CLICK FUNCTION
-//             $('.delete-btn').click(function () {
-//                 deleteMovie($(this).data("id"));
-//             });
-//         }
-// // SUB-NAVIGATION: FORM CONTROL
+        const rendermovies = (movies) => {
+            // Empty the HTML String on each call
+            let moviesHTML = "";
+            // Iterate through each movie
+            for (let movie of movies) {
+                // Create a new "Movie" Div, with nested divs for each listed attribute
+                moviesHTML += '<div class="movie">' +
+                    +
+                        // EDIT & DELETE BUTTONS
+                        // Rendered with the particular movie ID, this allows targeting of the class "edit-btn" or "delete-btn"
+                        // for simplified event function, while still allowing *this* particular movie to be targeted to PATCH or DELETE
+                        '<button class="edit-btn"  data-id="' + movie.id + '">Edit</button>' +
+                    '<button class="delete-btn" data-id="' + movie.id + '">Delete</button>' +
+                    // Closing individual "movie" div
+                    '</div>'
+            }
+            // Set the HTML of the target to the given string of elements & data.
+            $('#movies').html(moviesHTML);
+            // EDIT CLICK FUNCTION
+            $('.edit-btn').click(function () {
+                populateEdit($(this).data("id"));
+            });
+            // DELETE CLICK FUNCTION
+            $('.delete-btn').click(function () {
+                deleteMovie($(this).data("id"));
+            });
+        }
+// SUB-NAVIGATION: FORM CONTROL
 // Each Tab toggles its given form, as well as the tab's icon for a left or right arrow.
-//         $('#search-tab').click(() => {
-//             $('#search-form').toggleClass('hide');
-//             $('#search-right').toggleClass('hide');
-//             $('#search-left').toggleClass('hide');
-//         });
-//         $('#add-tab').click(() => {
-//             $('#add-form').toggleClass('hide');
-//             $('#add-right').toggleClass('hide');
-//             $('#add-left').toggleClass('hide');
-//         });
-//         $('#edit-tab').click(() => {
-//             $('#edit-form').toggleClass('hide');
-//             $('#edit-right').toggleClass('hide');
-//             $('#edit-left').toggleClass('hide');
-//         });
+        $('#search-tab').click(() => {
+            $('#search-form').toggleClass('hide');
+            $('#search-right').toggleClass('hide');
+            $('#search-left').toggleClass('hide');
+        });
+        $('#add-tab').click(() => {
+            $('#add-form').toggleClass('hide');
+            $('#add-right').toggleClass('hide');
+            $('#add-left').toggleClass('hide');
+        });
+        $('#edit-tab').click(() => {
+            $('#edit-form').toggleClass('hide');
+            $('#edit-right').toggleClass('hide');
+            $('#edit-left').toggleClass('hide');
+        });
 // FORM SUBMISSION: ADD FUNCTION
 // On click of "Add" Button, will create a new movie object from the return of the OMDB API
 // and send the new object to the createMovie() function, which posts it to our db
@@ -340,36 +348,37 @@ const OMDB_URL = `http://www.omdbapi.com/`;
 //             // Takes the form values of the title and rating
 //             let title = $('#add-title').val();
 //             let rating = $('#add-rating').val();
-            // GET Request from the OMDB API searching by our input title
-            // fetch(`${OMDB_URL}?t=${(title).toLowerCase()}&apikey=${OMDB_API}`)
-            //     .then(resp => resp.json())
-            //     .then(data => {
-            //         // Parsing through the returned attributes to match them to our Movie database attributes
-            //         let title = data.Title;
-            //         let year = data.Year;
-            //         let director = data.Director;
-            //         let poster = data.Poster;
-            //         let plot = data.Plot;
-            //         let genre = data.Genre;
-            //         let actors = data.Actors;
-            //         // Creating a new movie object with the desired attributes
-            //         let newMovie = {title, poster, rating, year, director, genre, actors, plot};
-            //
-            //         // calling the POST function with the new movie
-            //         function addMovie(newMovie){}
-            //
-            //     )
+        // GET Request from the OMDB API searching by our input title
+        // fetch(`${OMDB_URL}?t=${(title).toLowerCase()}&apikey=${OMDB_API}`)
+        //     .then(resp => resp.json())
+        //     .then(data => {
+        //         // Parsing through the returned attributes to match them to our Movie database attributes
+        //         let title = data.Title;
+        //         let year = data.Year;
+        //         let director = data.Director;
+        //         let poster = data.Poster;
+        //         let plot = data.Plot;
+        //         let genre = data.Genre;
+        //         let actors = data.Actors;
+        //         // Creating a new movie object with the desired attributes
+        //         let newMovie = {title, poster, rating, year, director, genre, actors, plot};
+        //
+        //         // calling the POST function with the new movie
+        //         function addMovie(newMovie){}
+        //
+        //     )
 //                 .catch(err => console.error(err));
 // //         });
 
-            //---- Loading Animation
+        //---- Loading Animation
 
-            $(window).load(function () {
-                setTimeout(function () {
-                    $('.preloader').fadeOut('slow');
-                }, 9000);
-            });
+        $(window).load(function () {
+            setTimeout(function () {
+                $('.preloader').fadeOut('slow');
+            }, 3000);
         });
+    })
+};
 
 
 
