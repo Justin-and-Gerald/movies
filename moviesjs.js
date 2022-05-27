@@ -20,18 +20,20 @@
                 .then(movies => {
                     let promises = [];
                     for (let movie of movies) {
-                        let {title,
+                        let {
+                            title,
                             rating,
                             id,
                             release_date,
                             director,
                             genre,
                             actors,
-                            overview} = movie;
+                            overview
+                        } = movie;
                         $('#main').append(`
-                            <div id="${title}" class="card my-2" style="width: 18rem;">
+                            <div id="${title}" class="card  my-2" style="width: 18rem;">
                                 <img class="card-img-top" data- src="" alt="movie poster">
-                                <div id="${id}" class="card-body">
+                                <div id="${id}" class="card-body d-flex flex-column">
                                     <h3>${title}</h3>
 <!--                                    <p class="rating fas fa-star">  Rating: ${rating}</p>-->
                                     <p class="released fas fa-star">   Released: ${release_date}</i></p>
@@ -39,11 +41,12 @@
 <!--                                    <p class="genre fas fa-star">  Genre: ${genre}</p>-->
 <!--                                    <p class="starring fas fa-star">  Starring: ${actors}</p>-->
                                     <p class="plot fas fa-star">  Plot: ${overview}</p>
-                                    <div class="d-flex justify-content-around">
+                                    <div class="mt-auto d-flex justify-content-around">
                                         <button data-movieid="${id}" data-movietitle="${title}" data-rating="${rating}" class="edit btn btn-dark">Edit</button>
                                         <button data-movieid="${id}" class="deletion btn btn-dark">Delete</button>
                                     </div>
-                                </div>
+                              </div>
+                              </div>
                             </div>
 
                         `);
@@ -67,7 +70,7 @@
         ourMovies();
         fetch(glitch)
             .then(response => response.json())
-        .then(json => console.log(json))
+            .then(json => console.log(json))
 
         //---- Add a Movie Tab
         let getSearchPoster = function () {
@@ -378,10 +381,8 @@
             }, 3000);
         });
     })
-};
-
-
-
+}
+;
 
 
 // research patch vs put
